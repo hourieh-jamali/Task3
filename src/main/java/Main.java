@@ -34,6 +34,7 @@ public class Main {
             }
 
             Map map = new Map(wide, height, obstacleInfos);
+            map.map[startX][startY] = 0;
             search(map, startX, startY, 0, 0);
 
             if(map.map[endX][endY] == Integer.MAX_VALUE){
@@ -56,6 +57,8 @@ public class Main {
                     int newX = startX + newSpeedX * move[0];
                     int newY = startY + newSpeedY * move[1];
                     if(newX > 0 && newX < map.getWide() && newY > 0 && newY < map.getHeight()){
+                        if(map.map[newX][newY] == -1)
+                            continue;
                         int preCount = map.map[startX][startY];
                         int newCount = map.map[newX][newY];
                         if(preCount + 1 < newCount){
